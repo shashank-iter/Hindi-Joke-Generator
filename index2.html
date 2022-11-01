@@ -5,52 +5,34 @@
     <link rel="stylesheet" href="/index.css" />
   </head>
   <body>
-    <h1 id="heading">Random Joke Generator</h1>
+    <h1 id="heading">Hindi Joke Generator</h1>
     <div id="box">
-       
       <p class="joke" id="setup"></p>
       <p class="joke" id="punch"></p>
-      <button id="btn"  >Get New Joke</button>
+      <button id="btn">Get New Joke</button>
     </div>
-    
-    <script type="module">
-        const adviceBtn = document.querySelector("#btn")
-        adviceBtn.onclick = geocode;
-        window.onload = geocode();
-        
-       
 
-        function geocode(){
-      const options = {
-        method: "GET",
-        headers: {
-          "X-RapidAPI-Key":
-            "a30b6031bbmsha3bb71c030bb873p138de0jsn30919b70ed5f",
-          "X-RapidAPI-Host": "joke110.p.rapidapi.com",
-        },
-      };
+    <script>
+      const adviceBtn = document.querySelector("#btn");
+      adviceBtn.onclick = getjoke;
+      window.onload = getjoke;
 
-      //       let response = await fetch(
-      //         "https://joke110.p.rapidapi.com/random_joke",
-      //         options
-      //       );
+      const jokesetup = document.getElementById("setup");
+      const jokepunch = document.getElementById("punch");
 
-      //       const data = await response.json();
-      // const joke = document.getElementById("joke")
-      // joke.textContent=data.setup + " "+data.punchline
-      //       console.log(data);
-
-      fetch("https://joke110.p.rapidapi.com/random_joke", options)
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data.id);
-          const jokesetup = document.getElementById("setup");
-          const jokepunch = document.getElementById("punch");
-          jokesetup.textContent = data.setup;
-          jokepunch.textContent =data.punchline;
-        })
-        .catch((err) => console.error(err));
-    }
+      function getjoke() {
+        fetch(
+          "https://hindi-jokes-api.onrender.com/jokes?api_key=0f5343573a6ed0df03faaf07cadf"
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            jokesetup.textContent = data.jokeContent;
+            console.log(data);
+          })
+          .catch((err) => {
+            console.log(`error ${err}`);
+          });
+      }
     </script>
   </body>
 </html>
